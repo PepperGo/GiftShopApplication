@@ -16,7 +16,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
+import peppergo.GiftShop.Dao.AdminDao;
 import peppergo.GiftShop.Dao.UserDao;
+import peppergo.GiftShop.Model.Administrator;
 import peppergo.GiftShop.Model.User;
 
 @Path("/loginservices")
@@ -55,11 +57,42 @@ public class LoginServices {
         return Response.ok().entity(String.valueOf(response)).build();
     }
     
+    @Path("/checkadminvalidity")
+    @POST
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response isValidAdmin(MultivaluedMap<String, String> formParam) {
+        boolean response = false;
+        Administrator temp = new Administrator();
+        temp.setAdminName(formParam.getFirst("username"));
+        temp.setPassword(formParam.getFirst("password"));
+        
+        
+        AdminDao dao = new AdminDao(); 
+        List<Administrator> adminList = new ArrayList(dao.getAdmins());
+        
+        for(int i = 0; i < adminList.size(); i++){
+            if(adminList.get(i).getAdminName().equals(temp.getAdminName()) && 
+                    adminList.get(i).getPassword().equals(temp.getPassword())){
+                response = true;
+                Response.ok().entity(String.valueOf(response)).build();
+            }        
+        }
+       
+        return Response.ok().entity(String.valueOf(response)).build();
+    }
+    
+
+    
+    
     @Path("/availableusername/{username}")
     @GET
     public String availableUsername(@PathParam("username") String username) {
         
         return username + "001";
     }
+    
+    
+    
 }
 

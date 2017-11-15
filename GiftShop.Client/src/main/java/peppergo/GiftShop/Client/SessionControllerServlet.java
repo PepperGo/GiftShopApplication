@@ -18,6 +18,8 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
+import peppergo.GiftShop.Bean.LoginBean;
+
 /**
  * Servlet implementation class SessionControllerServlet
  */
@@ -75,6 +77,7 @@ public class SessionControllerServlet extends HttpServlet {
 			session.setAttribute("USER", name);
 			RequestDispatcher rd=request.getRequestDispatcher("welcome-page.jsp");
 			rd.forward(request, response);
+			
 		}
 		else{
 			RequestDispatcher rd=request.getRequestDispatcher("login-error.jsp");

@@ -58,7 +58,7 @@ public class UserDao {
         String name = user.getUserName();
         String password = user.getPassword();
         for(int i = 0; i < userList.size(); i++){
-            if(userList.get(i).equals(name) && userList.get(i).equals(password))
+            if(userList.get(i).getUserName().equals(name) && userList.get(i).getPassword().equals(password))
                 return true;
         }
         return false;

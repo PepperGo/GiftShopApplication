@@ -1,4 +1,4 @@
-package peppergo.GiftShop.Client;
+package peppergo.GiftShop.Bean;
 
 public class LoginBean {
 
