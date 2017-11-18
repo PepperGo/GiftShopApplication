@@ -3,6 +3,7 @@
 */
 package peppergo.GiftShop.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -13,6 +14,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import peppergo.GiftShop.Dao.UserDao;
@@ -22,6 +25,7 @@ import peppergo.GiftShop.Model.User;
 @Path("/userservices")
 public class UserServices {
     
+    /*
     @Path("/userlists")
     @GET
     @Produces("application/json")
@@ -29,6 +33,18 @@ public class UserServices {
         UserDao dao = new UserDao();
         List Users = dao.getUsers();
         return Users;
+    }
+    */
+    
+    @Path("/userlists")
+    @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getUserList(){
+        UserDao dao = new UserDao();
+        List<User> usersList = dao.getUsers();
+        GenericEntity<List<User>> list = new GenericEntity<List<User>>(new ArrayList<User> (usersList)){};
+        //String name = usersList.get(0).getUserName();
+        return Response.ok().type(MediaType.APPLICATION_JSON).entity(list).build();
     }
  
     
@@ -73,5 +89,11 @@ public class UserServices {
     }
     
     */
+    @Path("/test")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getIt() {
+        return "User Services running!";
+    }
     
 }

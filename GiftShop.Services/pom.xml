@@ -45,6 +45,16 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Jersy -->
+
+
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+
+
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
