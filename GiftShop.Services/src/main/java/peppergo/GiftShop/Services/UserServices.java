@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
@@ -82,8 +83,7 @@ public class UserServices {
             return Response.ok().entity(String.valueOf(response)).build();
         }catch(Exception e){
             return Response.ok().entity(String.valueOf(response)).build();
-        }
-      
+        }  
         /*
         if(formParam.getFirst("password").equals("admin")){
             response = true;
@@ -91,9 +91,17 @@ public class UserServices {
         else{
             response = false;
         }
-        */
-        
-        
+        */  
+    }
+    
+    @Path("/user/{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getUserInfor(@PathParam("id") int id){
+        UserDao dao = new UserDao();
+        User user = dao.getUserById(id);
+        //String name = usersList.get(0).getUserName();
+        return Response.ok().type(MediaType.APPLICATION_JSON).entity(user).build();
     }
     
     /*

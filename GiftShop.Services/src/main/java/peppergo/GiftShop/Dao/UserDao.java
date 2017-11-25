@@ -54,6 +54,13 @@ public class UserDao {
     }
     */
     
+    public User getUserById(int id){
+        Session session = SessionUtil.getSession();        
+        Transaction tx = session.beginTransaction();
+        User user = (User) session.get(User.class, id);
+        return user;
+    }
+    
     public boolean isValidUser(User user){
         List<User> userList = new ArrayList<User>(this.getUsers());
         String name = user.getUserName();
@@ -65,6 +72,7 @@ public class UserDao {
         return false;
     }
     
+
     /*
     public int updateUser(int id, User emp){
          if(id <=0)  
