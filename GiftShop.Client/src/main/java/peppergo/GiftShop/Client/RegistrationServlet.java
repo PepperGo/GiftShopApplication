@@ -3,6 +3,7 @@ package peppergo.GiftShop.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.Registration;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 
-import peppergo.GiftShop.Bean.LoginBean;
+import peppergo.GiftShop.Bean.RegistrationBean;
 
 /**
  * Servlet implementation class SessionControllerServlet
@@ -45,7 +46,7 @@ public class RegistrationServlet extends HttpServlet {
 		String name=request.getParameter("name");
 		String password=request.getParameter("password");
 		
-		LoginBean bean=new LoginBean();
+		RegistrationBean bean=new RegistrationBean();
 		bean.setName(name);
 		bean.setPassword(password);
 		request.setAttribute("bean",bean);
@@ -54,7 +55,7 @@ public class RegistrationServlet extends HttpServlet {
 		try {
 			 
 			Client client = Client.create();
-			WebResource webResource = client.resource("http://localhost:8080/GiftShopServices/loginservices/checkuservalidity");
+			WebResource webResource = client.resource("http://localhost:8080/GiftShopServices/userservices/createByForm");
 			MultivaluedMap formData = new MultivaluedMapImpl();
 			formData.add("username", name);
 			formData.add("password", password);
@@ -75,7 +76,7 @@ public class RegistrationServlet extends HttpServlet {
 		if(status){
 			HttpSession session = request.getSession();
 			session.setAttribute("USER", name);
-			RequestDispatcher rd=request.getRequestDispatcher("welcome-page.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("registrationConfirm.jsp");
 			rd.forward(request, response);
 			
 		}
