@@ -16,7 +16,7 @@ public class Administrator {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String adminId ; 
+    private int adminId ; 
     
     @Column(name="adminName")
     private String adminName ;   
@@ -24,11 +24,11 @@ public class Administrator {
     @Column(name="password")
     private String password ;
 
-    public String getAdminId() {
+    public int getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(String adminId) {
+    public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
 

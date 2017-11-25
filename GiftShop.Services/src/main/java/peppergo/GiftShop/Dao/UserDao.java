@@ -25,7 +25,7 @@ public class UserDao {
     
     private void addUser(Session session, User bean){
         User newUser = new User();
-        newUser.setUserId(bean.getUserId());
+       // newUser.setUserId(bean.getUserId());
         newUser.setUserName(bean.getUserName());
         newUser.setPassword(bean.getPassword());
         
@@ -39,7 +39,7 @@ public class UserDao {
         session.close();
         return userList;
     }
- 
+ /*
     public int deleteUser(String id) {
         Session session = SessionUtil.getSession();
         Transaction tx = session.beginTransaction();
@@ -52,6 +52,7 @@ public class UserDao {
         session.close();
         return rowCount;
     }
+    */
     
     public boolean isValidUser(User user){
         List<User> userList = new ArrayList<User>(this.getUsers());

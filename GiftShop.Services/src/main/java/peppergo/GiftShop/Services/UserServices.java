@@ -15,6 +15,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import peppergo.GiftShop.Dao.UserDao;
@@ -47,12 +48,13 @@ public class UserServices {
     }
  
     
-    @Path("/create")
+    @Path("/createByJson")
     @POST
     @Consumes("application/json")
     public Response addUser(User user){
         
-        user.setUserId(user.getUserId());
+
+      //  user.setUserId(user.getUserId());
         user.setUserName(user.getUserName());
         user.setPassword(user.getPassword());
                 
@@ -60,6 +62,38 @@ public class UserServices {
         dao.addUser(user);
         
         return Response.ok().build();
+    }
+    
+    @Path("/createByForm")
+    @POST
+    @Consumes("application/x-www-form-urlencoded")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response isValidUser(MultivaluedMap<String, String> formParam) {
+        boolean response = false;
+        User temp = new User();
+        temp.setUserName(formParam.getFirst("username"));
+        temp.setPassword(formParam.getFirst("password"));
+        
+        
+        UserDao dao = new UserDao(); 
+        try{
+            dao.addUser(temp);
+            response = true;
+            return Response.ok().entity(String.valueOf(response)).build();
+        }catch(Exception e){
+            return Response.ok().entity(String.valueOf(response)).build();
+        }
+      
+        /*
+        if(formParam.getFirst("password").equals("admin")){
+            response = true;
+        }
+        else{
+            response = false;
+        }
+        */
+        
+        
     }
     
     /*

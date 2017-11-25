@@ -27,7 +27,7 @@ public class AdminDao {
     
     private void addAdmin(Session session, Administrator bean){
         Administrator newAdmin = new Administrator();
-        newAdmin.setAdminId(bean.getAdminId());
+        //newAdmin.setAdminId(bean.getAdminId());
         newAdmin.setAdminName(bean.getAdminName());
         newAdmin.setPassword(bean.getPassword());
         
@@ -42,12 +42,12 @@ public class AdminDao {
         return adminList;
     }
  
-    public int deleteAdmin(String id) {
+    public int deleteAdmin(int id) {
         Session session = SessionUtil.getSession();
         Transaction tx = session.beginTransaction();
         String hql = "delete from Administrator where adminId = :id";
         Query query = session.createQuery(hql);
-        query.setString("id",id);
+        query.setInteger("id",id);
         int rowCount = query.executeUpdate();
         System.out.println("Rows affected: " + rowCount);
         tx.commit();
