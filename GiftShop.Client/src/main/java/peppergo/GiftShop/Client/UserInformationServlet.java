@@ -115,7 +115,7 @@ public class UserInformationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
-       // int userId=Integer.parseInt(request.getParameter("userId"));
+        int userId=Integer.parseInt(request.getParameter("userId"));
         
         String name=request.getParameter("name");
         String password=request.getParameter("password");

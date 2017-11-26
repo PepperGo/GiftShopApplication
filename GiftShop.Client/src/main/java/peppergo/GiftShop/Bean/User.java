@@ -4,10 +4,6 @@ package peppergo.GiftShop.Bean;
 * @author MingSun E-mail:meetmark.sun@gmail.com
 */
 
-
-
-
-
 public class User {
 
     private int userId ; 
