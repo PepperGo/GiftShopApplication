@@ -57,7 +57,7 @@ public class UserInformationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
-      //  int userId=Integer.parseInt(request.getParameter("userId"));
+        //int userId=Integer.parseInt(request.getParameter("userId"));
         
         Boolean status = false;
         try {
@@ -82,10 +82,11 @@ public class UserInformationServlet extends HttpServlet {
 
             
             //out.write(jsonObj.get("email").getAsString());
-
+           
        
             
             HttpSession session = request.getSession();
+            session.setAttribute("userId", jsonObj.get("userId").getAsInt());
             session.setAttribute("userdata", jsonObj);
             RequestDispatcher rd=request.getRequestDispatcher("userInformation.jsp");
             rd.forward(request, response);
@@ -111,9 +112,10 @@ public class UserInformationServlet extends HttpServlet {
     }
     
     
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
+       // int userId=Integer.parseInt(request.getParameter("userId"));
         
         String name=request.getParameter("name");
         String password=request.getParameter("password");

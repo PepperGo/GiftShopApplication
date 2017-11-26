@@ -9,16 +9,22 @@
 <title>Your Information</title>
 
 <style>
-#editPart {
+#editPart{
     display: none;
 }
+
+#notshow{
+	display: none;
+}
 </style>
+
 
 </head>
 <body>
 <p> Your Information </p>
 
 <% 
+        int userId = (Integer) session.getAttribute("userId");
 		JsonObject jsonObj = (JsonObject) session.getAttribute("userdata");
 		String userName = jsonObj.get("userName").getAsString();
         String email = jsonObj.get("email").getAsString();
@@ -51,6 +57,9 @@
 
  <div id="editPart" >
 	<form id="editForm" action="UserInformationServlet" method="post">
+	    <div>userId:<input type="text" name="userId" value=<%=userId%>>
+	    userName:<input type="text" name="userId" value=<%=userName%>>
+	    </div>
 		UserName:<%=userName %> <br>
 		Email Address:<input type="text" name="password" value=<%=email%>><br>
 		Phone Number:<input type="text" name="phone" value=<%=phone%>><br>
