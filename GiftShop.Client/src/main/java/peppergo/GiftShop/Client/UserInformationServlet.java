@@ -80,19 +80,16 @@ public class UserInformationServlet extends HttpServlet {
             JsonParser parser = new JsonParser();
             JsonObject jsonObj = parser.parse(userInfo).getAsJsonObject();
 
-            //test jsonObject
+            
             //out.write(jsonObj.get("email").getAsString());
 
-            /*
+       
             
             HttpSession session = request.getSession();
-            session.setAttribute("userdata", userInfo);
+            session.setAttribute("userdata", jsonObj);
             RequestDispatcher rd=request.getRequestDispatcher("userInformation.jsp");
             rd.forward(request, response);
-         
-            */
             
-      
             
             
         } catch (Exception e) {
@@ -114,7 +111,7 @@ public class UserInformationServlet extends HttpServlet {
     }
     
     
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
         
