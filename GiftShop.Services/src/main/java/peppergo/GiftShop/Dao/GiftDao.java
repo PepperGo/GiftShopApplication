@@ -12,6 +12,10 @@ import org.hibernate.Transaction;
 
 import peppergo.GiftShop.Model.Gift;
 
+
+
+
+
 public class GiftDao {
     
     public void addGift(Gift bean){
@@ -40,6 +44,19 @@ public class GiftDao {
         List<Gift> giftList =  query.list();
         session.close();
         return giftList;
+    }
+    
+    public int deleteGift(int id) {
+        Session session = SessionUtil.getSession();
+        Transaction tx = session.beginTransaction();
+        String hql = "delete from Gift where giftid = :id";
+        Query query = session.createQuery(hql);
+        query.setInteger("id",id);
+        int rowCount = query.executeUpdate();
+        System.out.println("Rows affected: " + rowCount);
+        tx.commit();
+        session.close();
+        return rowCount;
     }
     
 }
