@@ -19,6 +19,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
+import org.json.JSONObject;
+
 import peppergo.GiftShop.Dao.UserDao;
 import peppergo.GiftShop.Model.User;
 
@@ -101,7 +103,11 @@ public class UserServices {
         UserDao dao = new UserDao();
         User user = dao.getUserById(id);
         //String name = usersList.get(0).getUserName();
-        return Response.ok().type(MediaType.APPLICATION_JSON).entity(user).build();
+        GenericEntity<User> outputUser = new GenericEntity<User>(user){};
+       // JSONObject outputUser = new JSONObject();
+        //outputUser.put("name", user.getUserName());
+        //outputUser.put(key, value)
+        return Response.ok().type(MediaType.APPLICATION_JSON).entity(outputUser).build();
     }
     
     /*
